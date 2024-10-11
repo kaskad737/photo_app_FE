@@ -2,32 +2,24 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
-    isLoading: false,
-    isAuthenticated: false,
-    token: ''
+    access: '',
+    refresh: ''
   },
   getters: {
   },
   mutations: {
     initializeStore(state) {
-      if (localStorage.getItem('token')) {
-        state.token = localStorage.getItem('token')
-        state.isAuthenticated = true
+      if (localStorage.getItem('access')) {
+        state.access = localStorage.getItem('access')
       } else {
-        state.token = ''
-        state.isAuthenticated = false
+        state.access = ''
       }
     },
-    setIsLoading(state, status) {
-      state.isLoading = status
+    setAccess(state, access) {
+      state.access = access
     },
-    setToken(state, token) {
-      state.token = token
-      state.isAuthenticated = true
-    },
-    removeToken(state) {
-      state.token = ''
-      state.isAuthenticated = false
+    removeAccess(state) {
+      state.access = ''
     }
   },
   actions: {

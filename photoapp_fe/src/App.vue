@@ -20,8 +20,8 @@
       beforeCreate() {
         this.$store.commit('initializeStore')
 
-        if (this.$store.state.token) {
-          axios.defaults.headers.common['Authorization'] = "Token " + this.$store.state.token
+        if (this.$store.state.access) {
+          axios.defaults.headers.common['Authorization'] = "JWT " + this.$store.state.access
         } else {
           axios.defaults.headers.common['Authorization'] = ""
         }

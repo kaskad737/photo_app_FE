@@ -43,7 +43,7 @@
                     
                     <div class="field">
                         <div class="control">
-                            <button class="button is-success">Submit</button>
+                            <button class="button is-success sub-btn">Sign up</button>
                         </div>
                     </div>
 
@@ -91,3 +91,11 @@ import axios from 'axios';
         }
     }
 </script>
+
+<style scoped>
+.sub-btn {
+    background-color: #6b1818;
+    color: white;
+    font-weight: bold;
+}
+</style>

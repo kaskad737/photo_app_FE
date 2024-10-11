@@ -1,6 +1,8 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
+    <router-link to="/image-download" class="button is-primary is-large is-fullwidth">
+      Download Image
+    </router-link>
   </div>
 </template>
 

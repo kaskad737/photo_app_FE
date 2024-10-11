@@ -7,6 +7,7 @@ import HomeView from '../views/HomeView.vue'
 import SignUp from '@/views/SignUp.vue'
 import LogIn from '@/views/LogIn.vue'
 import MyAccount from '@/views/dashboard/MyAccount.vue'
+import ImageDownload from '@/views/ImageDownload.vue'
 
 const routes = [
   {
@@ -28,6 +29,14 @@ const routes = [
     path: '/my-account',
     name: 'MyAccount',
     component: MyAccount,
+    meta: {
+      requireLogin: true
+    }
+  },
+  {
+    path: '/image-download',
+    name: 'ImageDownload',
+    component: ImageDownload,
     meta: {
       requireLogin: true
     }

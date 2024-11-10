@@ -1,0 +1,157 @@
+<template>
+  <div class="file-upload-wrapper is-flex is-justify-content-center is-align-items-center">
+    <div class="file-upload-container">
+      <!-- Файл для загрузки -->
+      <div class="file has-name is-boxed">
+        <label class="file-label">
+          <input class="file-input" type="file" @change="handleFileChange" accept="image/*">
+          <span class="file-cta">
+            <span class="file-icon">
+              <i class="fas fa-upload"></i>
+            </span>
+            <span class="file-label">
+              Select a file...
+            </span>
+          </span>
+          <span class="file-name" v-if="selectedFileName">{{ selectedFileName }}</span>
+        </label>
+      </div>
+
+      <!-- Выбор рамки -->
+      <div v-if="frames.length" class="frame-selection">
+        <p>Select a frame:</p>
+        <div class="control is-flex is-flex-wrap-wrap">
+          <label v-for="frame in frames" :key="frame.id" class="radio frame-radio">
+            <input type="radio" :value="frame.id" v-model="selectedFrameId">
+            <figure class="image is-64x64">
+              <img :src="frame.frame" :alt="frame.id">
+            </figure>
+          </label>
+        </div>
+      </div>
+
+      <!-- Кнопка загрузки -->
+      <div class="buttons is-flex is-justify-content-center">
+        <button class="button is-primary" @click="uploadFile" :disabled="!selectedFile || !selectedFrameId">Upload</button>
+      </div>
+
+      <!-- Предпросмотр изображения -->
+      <div v-if="uploadedImageUrl" class="image-preview">
+        <p class="has-text-centered">Preview the uploaded image:</p>
+        <figure class="image is-128x128 is-flex is-justify-content-center">
+          <img :src="uploadedImageUrl" alt="Uploaded Image">
+        </figure>
+      </div>
+    </div>
+  </div>
+</template>
+
+
+  
+<script>
+  import axios from 'axios';
+
+  export default {
+    name: 'ImageUpload',
+    data() {
+      return {
+        selectedFile: null,
+        selectedFileName: '',
+        uploadedImageUrl: '',
+        frames: [],  // Список рамок
+        selectedFrameId: null,  // Выбранная рамка
+      };
+    },
+    mounted() {
+      this.fetchFrames();  // Получаем рамки при монтировании компонента
+    },
+    methods: {
+      // Получение рамок с сервера
+      async fetchFrames() {
+        try {
+          const response = await axios.get('http://localhost:8000/image/list_frames/');
+          this.frames = response.data.results;  // Извлекаем массив результатов из "results"
+        } catch (error) {
+          console.error('Error fetching frames:', error);
+        }
+      },
+      // Обработка выбора файла
+      handleFileChange(event) {
+        const file = event.target.files[0];
+        if (file) {
+          this.selectedFile = file;
+          this.selectedFileName = file.name;
+          this.uploadedImageUrl = URL.createObjectURL(file);
+        }
+      },
+      // Загрузка файла
+      async uploadFile() {
+        if (!this.selectedFile || !this.selectedFrameId) return;
+
+        const formData = new FormData();
+        formData.append('file', this.selectedFile);
+        formData.append('frame_id', this.selectedFrameId);  // Добавляем выбранную рамку
+
+        try {
+          const response = await axios.post('http://localhost:8000/image/upload/', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+              'accept': '*/*',
+            },
+          });
+
+          console.log('The file has been successfully uploaded:', response.data);
+
+          // Очищаем форму
+          this.selectedFile = null;
+          this.selectedFileName = '';
+          this.selectedFrameId = null;
+        } catch (error) {
+          console.error('Error when uploading a file:', error);
+        }
+      },
+    },
+  };
+</script>
+
+  
+<style scoped>
+  .file-upload-container {
+    margin-top: 20px;
+  }
+  .image-preview {
+    margin-top: 20px;
+  }
+  .frame-selection {
+    margin-top: 20px;
+  }
+  .control {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Увеличиваем расстояние между рамками */
+  }
+  .frame-radio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .frame-radio figure {
+    width: 128px;  /* Увеличиваем размер контейнера */
+    height: 128px;
+  }
+  .frame-radio img {
+    max-width: 100%; /* Задаём максимальную ширину изображения, чтобы оно полностью вписывалось */
+    max-height: 100%; /* Ограничиваем максимальную высоту */
+    border: 2px solid #ccc;
+    padding: 5px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+  }
+  .frame-radio input[type="radio"]:checked + figure img {
+    border-color: #3273dc;
+  }
+</style>
+
+
+  

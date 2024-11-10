@@ -35,19 +35,21 @@
         <button class="button is-primary" @click="uploadFile" :disabled="!selectedFile || !selectedFrameId">Upload</button>
       </div>
 
-      <!-- Предпросмотр изображения -->
+      <!-- Предпросмотр изображения и кнопка для скачивания -->
       <div v-if="uploadedImageUrl" class="image-preview">
         <p class="has-text-centered">Preview the uploaded image:</p>
         <figure class="image is-128x128 is-flex is-justify-content-center">
           <img :src="uploadedImageUrl" alt="Uploaded Image">
         </figure>
+        <div class="has-text-centered" style="margin-top: 10px;">
+          <a :href="uploadedImageUrl" download="processed_image.png" class="button is-link">Download Image</a>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 
-  
 <script>
   import axios from 'axios';
 
@@ -98,9 +100,12 @@
               'Content-Type': 'multipart/form-data',
               'accept': '*/*',
             },
+            responseType: 'blob'
           });
 
           console.log('The file has been successfully uploaded:', response.data);
+
+          this.uploadedImageUrl = URL.createObjectURL(response.data);
 
           // Очищаем форму
           this.selectedFile = null;

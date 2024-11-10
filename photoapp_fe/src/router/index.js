@@ -4,10 +4,12 @@ import store from '@/store'
 
 import HomeView from '../views/HomeView.vue'
 
-import SignUp from '@/views/SignUp.vue'
+import Invite from '@/views/Invite.vue'
 import LogIn from '@/views/LogIn.vue'
 import MyAccount from '@/views/dashboard/MyAccount.vue'
-import ImageDownload from '@/views/ImageDownload.vue'
+import ImageUpload from '@/views/ImageUpload.vue'
+import FrameUpload from '@/views/FrameUpload.vue'
+import Invitation from '@/views/Invitation.vue'
 
 const routes = [
   {
@@ -16,9 +18,9 @@ const routes = [
     component: HomeView
   },
   {
-    path: '/sign-up',
-    name: 'SignUp',
-    component: SignUp
+    path: '/invite',
+    name: 'Invite',
+    component: Invite
   },
   {
     path: '/log-in',
@@ -34,12 +36,28 @@ const routes = [
     }
   },
   {
-    path: '/image-download',
-    name: 'ImageDownload',
-    component: ImageDownload,
-    meta: {
-      requireLogin: true
-    }
+    path: '/image-upload',
+    name: 'ImageUpload',
+    component: ImageUpload,
+    // meta: {
+    //   requireLogin: true
+    // }
+  },
+  {
+    path: '/frame-upload',
+    name: 'FrameUpload',
+    component: FrameUpload,
+    // meta: {
+    //   requireLogin: true
+    // }
+  },
+  {
+    path: '/invitation',
+    name: 'Invitation',
+    component: Invitation,
+    // meta: {
+    //   requireLogin: true
+    // }
   },
   {
     path: '/about',

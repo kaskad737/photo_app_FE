@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+    import axios from 'axios';
 
     export default {
         name: 'LogIn',
@@ -63,7 +63,7 @@ import axios from 'axios';
                         this.$store.commit('setAccess', access)
                         this.$store.commit('setRefresh', refresh)
 
-                        axios.defaults.headers.common['Authorization'] = "JWT " + access
+                        axios.defaults.headers.common['Authorization'] = "Bearer " + access
 
                         localStorage.setItem("access", access)
                         localStorage.setItem("refresh", refresh)
@@ -80,9 +80,14 @@ import axios from 'axios';
 </script>
 
 <style scoped>
-.sub-btn {
-    background-color: #6b1818;
-    color: white;
-    font-weight: bold;
-}
+    .sub-btn {
+        background-color: #6b1818;
+        color: white;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+
+    .sub-btn:hover {
+        background-color: #185ea0;
+    }
 </style>

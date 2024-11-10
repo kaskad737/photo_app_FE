@@ -21,7 +21,7 @@
         this.$store.commit('initializeStore')
 
         if (this.$store.state.access) {
-          axios.defaults.headers.common['Authorization'] = "JWT " + this.$store.state.access
+          axios.defaults.headers.common['Authorization'] = "Bearer " + this.$store.state.access
         } else {
           axios.defaults.headers.common['Authorization'] = ""
         }
@@ -30,5 +30,5 @@
 </script>
 
 <style lang="scss">
-@import '../node_modules/bulma';
+  @import '../node_modules/bulma';
 </style>

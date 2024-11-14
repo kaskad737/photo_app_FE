@@ -63,7 +63,7 @@ const routes = [
     // }
   },
   {
-    path: '/my-account/:time-in',
+    path: '/time-in',
     name: 'TimeIn',
     component: TimeIn,
     // meta: {
@@ -71,7 +71,7 @@ const routes = [
     // }
   },
   {
-    path: '/my-account/:time-out',
+    path: '/time-out',
     name: 'TimeOut',
     component: TimeOut,
     // meta: {

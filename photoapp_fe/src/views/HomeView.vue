@@ -1,5 +1,13 @@
 <template>
   <div class="button-container">
+    <router-link to="/time-in" class="button">
+      Check-in
+    </router-link>
+    <router-link to="/time-out" class="button">
+      Check-out
+    </router-link>
+  </div>
+  <div class="button-container">
     <router-link to="/image-upload" class="button is-primary is-large">
       Upload Image
     </router-link>
@@ -20,6 +28,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+    margin-bottom: 20px;
     justify-content: center; 
   }
 
@@ -34,6 +43,7 @@
     font-size: 16px; 
     text-decoration: none; 
     border-radius: 8px; 
+    background-color: blueviolet;
   }
 
   .button:hover {

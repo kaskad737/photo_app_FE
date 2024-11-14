@@ -10,6 +10,9 @@ import MyAccount from '@/views/dashboard/MyAccount.vue'
 import ImageUpload from '@/views/ImageUpload.vue'
 import FrameUpload from '@/views/FrameUpload.vue'
 import Invitation from '@/views/Invitation.vue'
+import TimeIn from '../views/dashboard/TimeIn.vue'
+import TimeOut from '@/views/dashboard/TimeOut.vue'
+
 
 const routes = [
   {
@@ -31,9 +34,9 @@ const routes = [
     path: '/my-account',
     name: 'MyAccount',
     component: MyAccount,
-    meta: {
-      requireLogin: true
-    }
+    // meta: {
+    //   requireLogin: true
+    // }
   },
   {
     path: '/image-upload',
@@ -55,6 +58,22 @@ const routes = [
     path: '/invitation',
     name: 'Invitation',
     component: Invitation,
+    // meta: {
+    //   requireLogin: true
+    // }
+  },
+  {
+    path: '/time-in',
+    name: 'TimeIn',
+    component: TimeIn,
+    // meta: {
+    //   requireLogin: true
+    // }
+  },
+  {
+    path: '/time-out',
+    name: 'TimeOut',
+    component: TimeOut,
     // meta: {
     //   requireLogin: true
     // }

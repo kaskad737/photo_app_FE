@@ -41,7 +41,8 @@
         <label for="sign">
             Sign in by entering your name below
         </label>
-        <input class='input' type="text" v-model="sign" v-on:blur="signValidation" required>
+        <input class='input' type="text" v-model="sign" @input="toUpperCase" 
+        required>
 
         <button class="button" type="submit">
             Submit
@@ -76,15 +77,18 @@ export default {
             // Update currentTime with the current date and time formatted as needed
             const now = new Date();
             this.timeIn = now.toLocaleTimeString();
-            },
         },
+
         beforeUnmount() {
             // Clear the interval when the component is destroyed
             clearInterval(this.timer);
-    },
-    //     signValidation(evt) {
-    //      
-    // },
+        },
+        toUpperCase() {
+            this.sign = this.sign.toUpperCase();
+        },
+        // validateForm() {
+        //     //compares username.toUpperCase() with sign input value
+        // }
 
         submitForm() {
             const formData = {
@@ -99,6 +103,9 @@ export default {
             };
             console.log(formData)
         },
+        
+        },
+
     }
 
 </script>

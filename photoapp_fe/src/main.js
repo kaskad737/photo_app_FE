@@ -6,4 +6,5 @@ import axios from 'axios'
 
 axios.defaults.baseURL = 'http://3.65.169.200:8000'
 
+
 createApp(App).use(store).use(router, axios).mount('#app')

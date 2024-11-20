@@ -59,7 +59,8 @@
         <label for="sign">
             Sign in by entering your name below
         </label>
-        <input class='input' type="text" v-model="sign" v-on:blur="signValidation" required>
+        <input class='input' type="text" v-model="sign" @input="toUpperCase" 
+        required>
 
         <button class="button" type="submit">
             Submit
@@ -99,29 +100,36 @@ export default {
             const now = new Date();
             this.timeOut = now.toLocaleTimeString();
         },
-    },
-    beforeUnmount() {
-        // Clear the interval when the component is destroyed
-        clearInterval(this.timer);
-    },
-    submitForm() {
-        const formData = {
-            restaurant: this.restaurants,
-            name: this.name,
-            frames: this.frames,
-            photos4x6: this.photos4x6,
-            cardsPrinted: this.cardsPrinted,
-            usedSets: this.usedSets,
-            cash: this.cash,
-            givenFrames: this.givenFrames,
-            damagedFrames: this.damagedFrames,
-            discount: this.discount,
-            cash: this.cash,
-            timeOut: this.timeOut,
-            sign: this.sign,
-        };
-        console.log(formData)
-    }
+        toUpperCase() {
+            this.sign = this.sign.toUpperCase();
+        },
+        beforeUnmount() {
+            // Clear the interval when the component is destroyed
+            clearInterval(this.timer);
+        },
+
+        // validateForm() { 
+        //     //compares username.toUpperCase() with sign input value
+        // }
+        submitForm() {
+            const formData = {
+                restaurant: this.restaurants,
+                name: this.name,
+                frames: this.frames,
+                photos4x6: this.photos4x6,
+                cardsPrinted: this.cardsPrinted,
+                usedSets: this.usedSets,
+                cash: this.cash,
+                givenFrames: this.givenFrames,
+                damagedFrames: this.damagedFrames,
+                discount: this.discount,
+                cash: this.cash,
+                timeOut: this.timeOut,
+                sign: this.sign,
+            };
+            console.log(formData)
+        }
+        },
 }
 
 </script>

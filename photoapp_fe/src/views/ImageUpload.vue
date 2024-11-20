@@ -1,14 +1,18 @@
 <template>
+  <h2 class="title is-flex is-justify-content-center">Upload your image below</h2>
   <div class="file-upload-wrapper is-flex is-justify-content-center is-align-items-center">
     <div class="file-upload-container">
       <!-- Файл для загрузки -->
+
+
       <div class="file has-name is-boxed">
         <label class="file-label">
           <input class="file-input" type="file" @change="handleFileChange" accept="image/*">
           <span class="file-cta">
-            <span class="file-icon">
-              <i class="fas fa-upload"></i>
-            </span>
+
+            <OhVueIcon class="icon" name="io-cloud-upload-outline" style="width: 24px; height: 24px" animation="float"
+              stroke="#fff" />
+
             <span class="file-label">
               Select a file...
             </span>
@@ -32,7 +36,8 @@
 
       <!-- Кнопка загрузки -->
       <div class="buttons is-flex is-justify-content-center">
-        <button class="button is-primary" @click="uploadFile" :disabled="!selectedFile || !selectedFrameId">Upload</button>
+        <button class="button is-primary" @click="uploadFile"
+          :disabled="!selectedFile || !selectedFrameId">Upload</button>
       </div>
 
       <!-- Предпросмотр изображения и кнопка для скачивания -->
@@ -51,10 +56,17 @@
 
 
 <script>
-  import axios from 'axios';
+import axios from 'axios';
+import { OhVueIcon, addIcons } from "oh-vue-icons";
+import { IoCloudUploadOutline } from "oh-vue-icons/icons";
+
+addIcons(IoCloudUploadOutline)
 
   export default {
-    name: 'ImageUpload',
+  name: 'ImageUpload',
+  components: {
+    OhVueIcon,
+  },
     data() {
       return {
         selectedFile: null,
@@ -63,8 +75,8 @@
         frames: [],  // Список рамок
         selectedFrameId: null,  // Выбранная рамка
       };
-    },
-    mounted() {
+  },
+  mounted() {
       this.fetchFrames();  // Получаем рамки при монтировании компонента
     },
     methods: {
@@ -116,7 +128,7 @@
         }
       },
     },
-  };
+};
 </script>
 
   
@@ -126,6 +138,9 @@
   }
   .image-preview {
     margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   .frame-selection {
     margin-top: 20px;
@@ -156,6 +171,13 @@
   .frame-radio input[type="radio"]:checked + figure img {
     border-color: #3273dc;
   }
+  .file.is-boxed.has-name .file-cta{
+    border-radius: 10px;
+  }
+  .image.is-128x128{
+    height: 100%;
+  }
+
 </style>
 
 

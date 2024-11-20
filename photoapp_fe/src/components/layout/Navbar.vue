@@ -11,11 +11,11 @@
                     <div class="navbar-item">
                         <div class="buttons">
                             <router-link v-if="isAuthenticated" to="/my-account"
-                                class="button is-succes my-account-btn"><strong>My Account</strong></router-link>
+                                class="button  btn1 "><strong>My Account</strong></router-link>
                             <router-link v-if="isAuthenticated" to="/invite"
-                                class="button is-succes"><strong>Invite</strong></router-link>
+                                class="button  btn2"><strong>Invite</strong></router-link>
                             <router-link v-if="isAuthenticated" to="/" @click.prevent="logout"
-                                class="button is-danger"><strong>Log out</strong></router-link>
+                                class="button  btn3"><strong>Log out</strong></router-link>
                             <router-link v-if="!isAuthenticated" to="/log-in" class="button is-light">Log
                                 in</router-link>
                         </div>
@@ -48,6 +48,15 @@
     background-color: #2f4870;
     color: white;
     font-weight: bold;
+}
+.btn1{
+
+}
+.btn2{
+
+}
+.btn3{
+    
 }
 .navbar-menu{
     display: flex;

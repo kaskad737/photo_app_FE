@@ -1,40 +1,48 @@
 <template>
-    <div class="file-upload-wrapper is-flex is-justify-content-center is-align-items-center">
-      <div class="file-upload-container">
-        <div class="file has-name is-boxed">
-          <label class="file-label">
-            <input class="file-input" type="file" @change="handleFileChange" accept="image/*">
-            <span class="file-cta">
-              <span class="file-icon">
-                <i class="fas fa-upload"></i>
-              </span>
-              <span class="file-label">
-                Select a file...
-              </span>
+  <h2 class="title is-flex is-justify-content-center">Upload the frame below</h2>
+  <div class="file-upload-wrapper is-flex is-justify-content-center is-align-items-center">
+    <div class="file-upload-container">
+      <div class="file has-name is-boxed">
+        <label class="file-label">
+          <input class="file-input" type="file" @change="handleFileChange" accept="image/*">
+          <span class="file-cta">
+
+            <OhVueIcon class="icon" name="io-cloud-upload-outline" style="width: 24px; height: 24px" animation="float" fill="#fC644d" />
+
+            <span class="file-label">
+              Select a file...
             </span>
-            <span class="file-name" v-if="selectedFileName">{{ selectedFileName }}</span>
-          </label>
-        </div>
-    
-        <div class="buttons is-flex is-justify-content-center">
-          <button class="button is-primary" @click="uploadFile" :disabled="!selectedFile">Upload</button>
-        </div>
-    
-        <div v-if="uploadedImageUrl" class="image-preview">
-          <p class="has-text-centered">Preview the uploaded image:</p>
-          <figure class="image is-128x128 is-flex is-justify-content-center">
-            <img :src="uploadedImageUrl" alt="Uploaded Image">
-          </figure>
-        </div>
+          </span>
+          <span class="file-name" v-if="selectedFileName">{{ selectedFileName }}</span>
+        </label>
+      </div>
+
+      <div class="buttons is-flex is-justify-content-center">
+        <button class="button is-primary" @click="uploadFile" :disabled="!selectedFile">Upload</button>
+      </div>
+
+      <div v-if="uploadedImageUrl" class="image-preview">
+        <p class="has-text-centered">Preview the uploaded image:</p>
+        <figure class="image is-128x128 is-flex is-justify-content-center">
+          <img :src="uploadedImageUrl" alt="Uploaded Image">
+        </figure>
       </div>
     </div>
-  </template>
+  </div>
+</template>
     
   <script>
-    import axios from 'axios';
+  import axios from 'axios';
+  import { OhVueIcon, addIcons } from "oh-vue-icons";
+  import { IoCloudUploadOutline } from "oh-vue-icons/icons";
+
+  addIcons(IoCloudUploadOutline)
     
     export default {
-      name: 'FrameUpload',
+    name: 'FrameUpload',
+    components: {
+      OhVueIcon,
+    },
       data() {
         return {
           selectedFile: null,
@@ -79,11 +87,23 @@
   </script>
     
   <style scoped>
-    .file-upload-container {
-      margin-top: 20px;
-    }
-    .image-preview {
-      margin-top: 20px;
-    }
-  </style>
+  .file-upload-container {
+    margin-top: 20px;
+  }
+
+  .image-preview {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .file.is-boxed.has-name .file-cta {
+    border-radius: 10px;
+  }
+
+  .image.is-128x128 {
+    height: 100%;
+  }
+</style>
     

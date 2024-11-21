@@ -16,11 +16,11 @@
     <div class="button-container">
       <router-link to="/frame-upload" class="button is-primary is-large">
         <OhVueIcon name="md-filterframes-outlined" scale="1.5" />
-        Upload Frame
+        1.Upload Frame
       </router-link>
       <router-link to="/image-upload" class="button is-primary is-large">
         <OhVueIcon name="bi-image-fill" scale="1.5" />
-        Upload Image
+        2.Upload Image
       </router-link>
     </div>
   </div>

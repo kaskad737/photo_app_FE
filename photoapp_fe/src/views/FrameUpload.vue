@@ -7,7 +7,7 @@
           <input class="file-input" type="file" @change="handleFileChange" accept="image/*">
           <span class="file-cta">
 
-            <OhVueIcon class="icon" name="io-cloud-upload-outline" style="width: 24px; height: 24px" animation="float" fill="#fC644d" />
+            <OhVueIcon class="icon" name="md-cloudupload-outlined" scale="1.5" animation="float" />
 
             <span class="file-label">
               Select a file...
@@ -27,6 +27,10 @@
           <img :src="uploadedImageUrl" alt="Uploaded Image">
         </figure>
       </div>
+
+      <router-link v-if="uploadedImageUrl" to="/image-upload" class="button is-primary is-large">
+        Upload Image
+      </router-link>
     </div>
   </div>
 </template>
@@ -34,9 +38,9 @@
   <script>
   import axios from 'axios';
   import { OhVueIcon, addIcons } from "oh-vue-icons";
-  import { IoCloudUploadOutline } from "oh-vue-icons/icons";
+  import { MdClouduploadOutlined } from "oh-vue-icons/icons";
 
-  addIcons(IoCloudUploadOutline)
+  addIcons(MdClouduploadOutlined)
     
     export default {
     name: 'FrameUpload',
@@ -89,6 +93,9 @@
   <style scoped>
   .file-upload-container {
     margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .image-preview {
@@ -104,6 +111,7 @@
 
   .image.is-128x128 {
     height: 100%;
+    width: 500px;
   }
 </style>
     

@@ -44,7 +44,7 @@
         <input class='input' type="text" v-model="sign" @input="toUpperCase" 
         required>
 
-        <button class="button" type="submit">
+        <button class="button submit-btn" type="submit">
             Submit
         </button>
     </form>
@@ -111,6 +111,13 @@ export default {
 </script>
 
 <style>
+.field{
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    align-items: stretch;
+    max-width: 500px;
+}
 .input {
     margin-bottom: 10px;
  }
@@ -119,5 +126,12 @@ export default {
     display: block;
     margin-bottom: 10px;
  }
+ .submit-btn{
+    background-color: blueviolet;
+    color: white;
+ }
+  .submit-btn:hover{
+    background-color: #4258ff;
+  }
 
 </style>

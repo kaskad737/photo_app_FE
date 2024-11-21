@@ -10,8 +10,8 @@
           <input class="file-input" type="file" @change="handleFileChange" accept="image/*">
           <span class="file-cta">
 
-            <OhVueIcon class="icon" name="io-cloud-upload-outline" style="width: 24px; height: 24px" animation="float"
-              stroke="#fff" />
+            <OhVueIcon class="icon" name="md-cloudupload-outlined" scale="1.5" animation="float" />
+
 
             <span class="file-label">
               Select a file...
@@ -58,9 +58,9 @@
 <script>
 import axios from 'axios';
 import { OhVueIcon, addIcons } from "oh-vue-icons";
-import { IoCloudUploadOutline } from "oh-vue-icons/icons";
+import { MdClouduploadOutlined } from "oh-vue-icons/icons";
 
-addIcons(IoCloudUploadOutline)
+addIcons(MdClouduploadOutlined)
 
   export default {
   name: 'ImageUpload',
@@ -135,6 +135,9 @@ addIcons(IoCloudUploadOutline)
 <style scoped>
   .file-upload-container {
     margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   .image-preview {
     margin-top: 20px;
@@ -174,8 +177,9 @@ addIcons(IoCloudUploadOutline)
   .file.is-boxed.has-name .file-cta{
     border-radius: 10px;
   }
-  .image.is-128x128{
-    height: 100%;
+  .image.is-128x128 {
+      height: 100%;
+      width: 500px;
   }
 
 </style>

@@ -81,7 +81,7 @@
 
 <style scoped>
     .sub-btn {
-        background-color: #6b1818;
+        background-color: blueviolet;
         color: white;
         font-weight: bold;
         transition: background-color 0.3s ease;

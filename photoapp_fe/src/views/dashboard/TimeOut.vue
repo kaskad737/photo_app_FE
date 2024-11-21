@@ -59,10 +59,9 @@
         <label for="sign">
             Sign in by entering your name below
         </label>
-        <input class='input' type="text" v-model="sign" @input="toUpperCase" 
-        required>
+        <input class='input' type="text" v-model="sign" @input="toUpperCase" required>
 
-        <button class="button" type="submit">
+        <button class="button submit-btn" type="submit">
             Submit
         </button>
     </form>

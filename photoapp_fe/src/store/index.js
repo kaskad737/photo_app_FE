@@ -4,7 +4,10 @@ export default createStore({
   state: {
     access: '',
     refresh: '',
-    isAuthenticated: false
+    isAuthenticated: false,
+    userId: null,
+    username: '',
+    userFirstName: '',
   },
   getters: {
   },
@@ -27,7 +30,17 @@ export default createStore({
       state.access = '';
       state.isAuthenticated = false;
       localStorage.removeItem('access');
-    }
+    },
+    setUser(state, { userId, username, userFirstName }) {
+      state.userId = userId;
+      state.username = username;
+      state.userFirstName = userFirstName;
+    },
+    clearUser(state) {
+      state.userId = null;
+      state.username = '';
+      state.userFirstName = ';'
+    },
   },
   actions: {
   },

@@ -10,14 +10,10 @@
                 <div class="navbar-end">
                     <div class="navbar-item">
                         <div class="buttons">
-                            <router-link v-if="isAuthenticated" to="/my-account"
-                                class="button  btn1 "><strong>My Account</strong></router-link>
-                            <router-link v-if="isAuthenticated" to="/invite"
-                                class="button  btn2"><strong>Invite</strong></router-link>
-                            <router-link v-if="isAuthenticated" to="/" @click.prevent="logout"
-                                class="button  btn3"><strong>Log out</strong></router-link>
-                            <router-link v-if="!isAuthenticated" to="/log-in" class="button is-light">Log
-                                in</router-link>
+                            <router-link v-if="isAuthenticated" to="/my-account" class="button is-info is-inverted"><strong>My Account</strong></router-link>
+                            <router-link v-if="isAuthenticated" to="/invite" class="button is-success is-inverted"><strong>Invite</strong></router-link>
+                            <router-link v-if="isAuthenticated" to="/log-in" @click.prevent="logout" class="button  is-danger is-inverted"><strong>Log out</strong></router-link>
+                            <router-link v-if="!isAuthenticated && $route.path !== '/log-in'" to="/log-in" class="button">Log in</router-link>
                         </div>
                     </div>
                 </div>
@@ -37,7 +33,7 @@
     methods: {
         logout() {
             this.$store.commit('removeAccess')
-            this.$router.push('/'); 
+            this.$router.push('/log-in'); 
         }
     }
 }
@@ -48,15 +44,6 @@
     background-color: #2f4870;
     color: white;
     font-weight: bold;
-}
-.btn1{
-
-}
-.btn2{
-
-}
-.btn3{
-    
 }
 .navbar-menu{
     display: flex;

@@ -1,36 +1,47 @@
 <template>
-  <h2 class="title is-flex is-justify-content-center">Upload the frame below</h2>
-  <div class="file-upload-wrapper is-flex is-justify-content-center is-align-items-center">
-    <div class="file-upload-container">
-      <div class="file has-name is-boxed">
-        <label class="file-label">
-          <input class="file-input" type="file" @change="handleFileChange" accept="image/*">
-          <span class="file-cta">
+  <div class="container">
 
-            <OhVueIcon class="icon" name="md-cloudupload-outlined" scale="1.5" animation="float" />
+    <router-link to="/"
+      class="button"><strong>← Back</strong>
+    </router-link>
 
-            <span class="file-label">
-              Select a file...
+    <h2 class="title is-flex is-justify-content-center">Upload the frame below</h2>
+    <div class="file-upload-wrapper is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
+      <label for="restaurants">
+        Select a restaurant:
+      </label>
+      <div class="select is-medium">
+        <select v-model="selectedRestaurantId">
+          <option v-for="restaurant in restaurants" :key="restaurant.id" :value="restaurant.id">
+            {{ restaurant.name }}
+          </option>
+        </select>
+      </div>
+      <div  v-if="selectedRestaurantId" class="file-upload-container">
+        <div class="file has-name is-boxed">
+          <label class="file-label">
+            <input class="file-input" type="file" @change="handleFileChange" accept="image/*">
+            <span class="file-cta">
+              <OhVueIcon class="icon" name="md-cloudupload-outlined" scale="1.5" animation="float" />
+              <span class="file-label">
+                Select a file...
+              </span>
             </span>
-          </span>
-          <span class="file-name" v-if="selectedFileName">{{ selectedFileName }}</span>
-        </label>
-      </div>
+            <span class="file-name" v-if="selectedFileName">{{ selectedFileName }}</span>
+          </label>
+        </div>
 
-      <div class="buttons is-flex is-justify-content-center">
-        <button class="button is-primary" @click="uploadFile" :disabled="!selectedFile">Upload</button>
-      </div>
+        <div class="buttons is-flex is-justify-content-center">
+          <button class="button is-primary" @click="uploadFile" :disabled="!(selectedFile && selectedRestaurantId)">Upload</button>
+        </div>
 
-      <div v-if="uploadedImageUrl" class="image-preview">
-        <p class="has-text-centered">Preview the uploaded image:</p>
-        <figure class="image is-128x128 is-flex is-justify-content-center">
-          <img :src="uploadedImageUrl" alt="Uploaded Image">
-        </figure>
+        <div v-if="uploadedImageUrl" class="image-preview">
+          <p class="has-text-centered">Preview the uploaded image:</p>
+          <figure class="image is-128x128 is-flex is-justify-content-center">
+            <img :src="uploadedImageUrl" alt="Uploaded Image">
+          </figure>
+        </div>
       </div>
-
-      <router-link v-if="uploadedImageUrl" to="/image-upload" class="button is-primary is-large">
-        Upload Image
-      </router-link>
     </div>
   </div>
 </template>
@@ -51,8 +62,13 @@
         return {
           selectedFile: null,
           selectedFileName: '',
-          uploadedImageUrl: ''
+          uploadedImageUrl: '',
+          restaurants: [],
+          selectedRestaurantId: null,
         };
+      },
+      mounted() {
+        this.fetchRestaurants();
       },
       methods: {
         handleFileChange(event) {
@@ -63,11 +79,22 @@
             this.uploadedImageUrl = URL.createObjectURL(file);
           }
         },
+
+        async fetchRestaurants() {
+          try {
+            const response = await axios.get('workday/restaurants/');
+            this.restaurants = response.data.results;
+          } catch (error) {
+            console.error('Error fetching restaurants:', error);
+          }
+        },
+
         async uploadFile() {
           if (!this.selectedFile) return;
     
           const formData = new FormData();
           formData.append('file', this.selectedFile);
+          formData.append('restaurant', this.selectedRestaurantId);
           
           console.log(axios.defaults.headers.common)
           try {
@@ -82,6 +109,7 @@
     
             this.selectedFile = null;
             this.selectedFileName = '';
+            this.selectedRestaurantId = null;
           } catch (error) {
             console.error('Error when uploading a file:', error);
           }

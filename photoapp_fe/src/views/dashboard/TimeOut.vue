@@ -4,8 +4,8 @@
         <label for="restaurants">
             Select your restaurant
         </label>
-        <select name="" v-model="restaurants" class="select">
-            <option v-for="option in restaurants" value="option">{{ option }}</option>
+        <select name="" v-model="selectedRestaurant" class="input">
+            <option v-for="option in restaurantList" :value="option">{{ option }}</option>
         </select>
         <label for="userName">
             Name
@@ -56,11 +56,6 @@
         </label>
         <input class='input' type="text" v-bind:value="timeOut" readonly>
 
-        <label for="sign">
-            Sign in by entering your name below
-        </label>
-        <input class='input' type="text" v-model="sign" @input="toUpperCase" required>
-
         <button class="button submit-btn" type="submit">
             Submit
         </button>
@@ -69,12 +64,15 @@
 </template>
 
 <script>
+import restaurants from '../../assets/restaurants.json'
+const restaurantList = restaurants.map(rest => rest.name)
+
 export default {
     name: 'TimeOut',
     data() {
         return {
-            restaurants: ["Restaurant1", "Restaurant2", "Restaurant3", "Restaurant4",],
-            restaurant: '',
+            restaurantList,
+            selectedRestaurant: '',
             userName: '',
             frames: '',
             photos4x6: '',
@@ -85,7 +83,6 @@ export default {
             damagedFrames: '',
             discount: '',
             timeOut: '',
-            sign: '',
         };
     },
     created() {
@@ -99,20 +96,13 @@ export default {
             const now = new Date();
             this.timeOut = now.toLocaleTimeString();
         },
-        toUpperCase() {
-            this.sign = this.sign.toUpperCase();
-        },
         beforeUnmount() {
             // Clear the interval when the component is destroyed
             clearInterval(this.timer);
         },
-
-        // validateForm() { 
-        //     //compares username.toUpperCase() with sign input value
-        // }
         submitForm() {
             const formData = {
-                restaurant: this.restaurants,
+                restaurant: this.selectedRestaurant,
                 name: this.name,
                 frames: this.frames,
                 photos4x6: this.photos4x6,
@@ -124,7 +114,6 @@ export default {
                 discount: this.discount,
                 cash: this.cash,
                 timeOut: this.timeOut,
-                sign: this.sign,
             };
             console.log(formData)
         }

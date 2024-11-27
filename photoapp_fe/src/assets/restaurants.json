@@ -1,0 +1,32 @@
+[
+  {
+    "_id": "67405cd62e2e44a86227441c",
+    "name": "BITREX",
+    "picture": "http://placehold.it/128x128"
+  },
+  {
+    "_id": "67405cd628dddafa79a9ea6c",
+    "name": "UNCORP",
+    "picture": "http://placehold.it/128x128"
+  },
+  {
+    "_id": "67405cd651d7c1c71a0eaa01",
+    "name": "NETPLODE",
+    "picture": "http://placehold.it/128x128"
+  },
+  {
+    "_id": "67405cd6856bb4e70355fa67",
+    "name": "ZYTRAX",
+    "picture": "http://placehold.it/128x128"
+  },
+  {
+    "_id": "67405cd6931c9029d7f069d8",
+    "name": "ROOFORIA",
+    "picture": "http://placehold.it/128x128"
+  },
+  {
+    "_id": "67405cd654e843f54970e389",
+    "name": "SEALOUD",
+    "picture": "http://placehold.it/128x128"
+  }
+]

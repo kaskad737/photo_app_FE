@@ -1,46 +1,59 @@
 <template>
-  <h2 class="title is-flex is-justify-content-center">Upload the frame below</h2>
+  <h2 class="title">Register a new restaurant</h2>
   <div class="file-upload-wrapper is-flex is-justify-content-center is-align-items-center">
     <div class="file-upload-container">
-      <div class="file has-name is-boxed">
+      <label for="name" class="label">
+        Restaurant name
+        <input type="text" class="input" v-model="newRestaurant" required>
+      </label>
+      <form class="file has-name is-boxed">
         <label class="file-label">
-          <input class="file-input" type="file" @change="handleFileChange" accept="image/*">
+          <input class="file-input" type="file" @change="handleFileChange" accept="image/*" required>
           <span class="file-cta">
-
             <OhVueIcon class="icon" name="md-cloudupload-outlined" scale="1.5" animation="float" />
-
             <span class="file-label">
               Select a file...
             </span>
           </span>
           <span class="file-name" v-if="selectedFileName">{{ selectedFileName }}</span>
         </label>
-      </div>
+      </form>
 
       <div class="buttons is-flex is-justify-content-center">
-        <button class="button is-primary" @click="uploadFile" :disabled="!selectedFile">Upload</button>
+        <button class="button is-primary" @click="addItem" :disabled="!selectedFile||!newRestaurant">Save</button>
       </div>
 
-      <div v-if="uploadedImageUrl" class="image-preview">
+      <!-- <div v-if="uploadedImageUrl" class="image-preview">
         <p class="has-text-centered">Preview the uploaded image:</p>
         <figure class="image is-128x128 is-flex is-justify-content-center">
           <img :src="uploadedImageUrl" alt="Uploaded Image">
         </figure>
-      </div>
+      </div> -->
 
-      <router-link v-if="uploadedImageUrl" to="/image-upload" class="button is-primary is-large">
-        Upload Image
-      </router-link>
     </div>
+  </div>
+  <div>
+    <h2 class="title">A list of saved restaurants:</h2>
+    <ul>
+      <li v-for="item, index in restaurants" class="list-item-container">
+        <p class="item-title">{{item.name}}</p>
+        <img :src="item.picture" >
+        <button type="button" @click="deleteItem(index)">
+          <OhVueIcon name="md-close"/>
+        </button>
+      </li>
+    </ul>
   </div>
 </template>
     
   <script>
+  import restaurants from '../assets/restaurants.json'
   import axios from 'axios';
   import { OhVueIcon, addIcons } from "oh-vue-icons";
-  import { MdClouduploadOutlined } from "oh-vue-icons/icons";
+  import { MdClouduploadOutlined, MdClose } from "oh-vue-icons/icons";
 
-  addIcons(MdClouduploadOutlined)
+
+  addIcons(MdClouduploadOutlined, MdClose)
     
     export default {
     name: 'FrameUpload',
@@ -49,12 +62,28 @@
     },
       data() {
         return {
+          newRestaurant:'',
           selectedFile: null,
           selectedFileName: '',
-          uploadedImageUrl: ''
+          uploadedImageUrl: '',
+          restaurants,
         };
       },
-      methods: {
+    methods: {
+      deleteItem(index) { 
+        this.restaurants.splice(index, 1)
+      },
+      addItem() {
+        const formData = new FormData();
+        const data = {
+          name: this.newRestaurant,
+          file: this.selectedFile,
+        }
+        formData.append('formData', data);
+        const file = formData.get('formData')
+        console.log(file)
+
+      },
         handleFileChange(event) {
           const file = event.target.files[0];
           if (file) {
@@ -67,7 +96,7 @@
           if (!this.selectedFile) return;
     
           const formData = new FormData();
-          formData.append('file', this.selectedFile);
+          formData.append(this.selectedFile);
           
           console.log(axios.defaults.headers.common)
           try {
@@ -91,6 +120,10 @@
   </script>
     
   <style scoped>
+  .file-upload-wrapper{
+    margin-bottom: 40px;
+  }
+
   .file-upload-container {
     margin-top: 20px;
     display: flex;
@@ -109,9 +142,25 @@
     border-radius: 10px;
   }
 
-  .image.is-128x128 {
+  /* .image.is-128x128 {
     height: 100%;
     width: 500px;
+  } */
+
+  .list-item-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 15px;
+    border: 1px solid grey;
+    border-radius: 20px;
+    padding: 10px;
   }
+
+  .item-title{
+    width: 150px;
+    word-wrap: break-word;
+  }
+
 </style>
     

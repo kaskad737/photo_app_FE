@@ -4,8 +4,8 @@
         <label for="restaurants">
             Select your restaurant
         </label>
-        <select name="" v-model="restaurants" class="select">
-            <option v-for="option in restaurants" value="option">{{option}}</option>
+        <select name="" v-model="selectedRestaurant" class="input">
+            <option v-for="option in restaurantList" :value="option">{{option}}</option>
         </select>
 
         <label for="name">
@@ -38,12 +38,6 @@
         </label>
         <input class='input' type="text" v-bind:value="timeIn" readonly>
 
-        <label for="sign">
-            Sign in by entering your name below
-        </label>
-        <input class='input' type="text" v-model="sign" @input="toUpperCase" 
-        required>
-
         <button class="button submit-btn" type="submit">
             Submit
         </button>
@@ -51,20 +45,21 @@
 </template>
 
 <script>
+import restaurants from '../../assets/restaurants.json'
+const restaurantList = restaurants.map(rest => rest.name)
 
 export default {
     name: 'TimeIn',
     data() {
         return {
-            restaurants: ["Restaurant1", "Restaurant2", "Restaurant3", "Restaurant4", ],
-            restaurant: '',
+            restaurantList,
+            selectedRestaurant: '',
             userName: '',
             frames: '',
             sets: '',
             printer: '',
             cash: '',
             timeIn: '',
-            sign: '',
         };
     },
     created() {
@@ -83,23 +78,16 @@ export default {
             // Clear the interval when the component is destroyed
             clearInterval(this.timer);
         },
-        toUpperCase() {
-            this.sign = this.sign.toUpperCase();
-        },
-        // validateForm() {
-        //     //compares username.toUpperCase() with sign input value
-        // }
 
         submitForm() {
             const formData = {
-                restaurant: this.restaurants,
+                restaurant: this.selectedRestaurant,
                 timeIn: this.timeIn,
                 name: this.name,
                 frames: this.frames,
                 sets: this.sets,
                 printer: this.printer,
                 cash: this.cash,
-                sign: this.sign,
             };
             console.log(formData)
         },

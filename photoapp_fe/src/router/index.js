@@ -10,20 +10,30 @@ import MyAccount from '@/views/dashboard/MyAccount.vue'
 import ImageUpload from '@/views/ImageUpload.vue'
 import FrameUpload from '@/views/FrameUpload.vue'
 import Invitation from '@/views/Invitation.vue'
-import TimeIn from '../views/dashboard/TimeIn.vue'
+import TimeIn from '@/views/dashboard/TimeIn.vue'
 import TimeOut from '@/views/dashboard/TimeOut.vue'
+import RestaurantList from "@/views/RestaurantList.vue";
+import RestaurantCreate from "@/views/RestaurantCreate.vue";
+import Statistics from "@/views/Statistics.vue";
+import Reports from "@/views/Reports.vue";
 
 
 const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomeView
+    component: HomeView,
+    meta: {
+      requireLogin: true
+    }
   },
   {
     path: '/invite',
     name: 'Invite',
-    component: Invite
+    component: Invite,
+    meta: {
+      requireLogin: true
+    }
   },
   {
     path: '/log-in',
@@ -34,49 +44,81 @@ const routes = [
     path: '/my-account',
     name: 'MyAccount',
     component: MyAccount,
-    // meta: {
-    //   requireLogin: true
-    // }
+    meta: {
+      requireLogin: true
+    }
   },
   {
     path: '/image-upload',
     name: 'ImageUpload',
     component: ImageUpload,
-    // meta: {
-    //   requireLogin: true
-    // }
+    meta: {
+      requireLogin: true
+    }
   },
   {
     path: '/frame-upload',
     name: 'FrameUpload',
     component: FrameUpload,
-    // meta: {
-    //   requireLogin: true
-    // }
+    meta: {
+      requireLogin: true
+    }
   },
   {
     path: '/invitation',
     name: 'Invitation',
     component: Invitation,
-    // meta: {
-    //   requireLogin: true
-    // }
+    meta: {
+      requireLogin: true
+    }
   },
   {
     path: '/time-in',
     name: 'TimeIn',
     component: TimeIn,
-    // meta: {
-    //   requireLogin: true
-    // }
+    meta: {
+      requireLogin: true
+    }
   },
   {
     path: '/time-out',
     name: 'TimeOut',
     component: TimeOut,
-    // meta: {
-    //   requireLogin: true
-    // }
+    meta: {
+      requireLogin: true
+    }
+  },
+  {
+    path: "/restaurants-list",
+    name: "RestaurantList",
+    component: RestaurantList,
+    meta: {
+      requireLogin: true
+    }
+  },
+  {
+    path: "/restaurant-register",
+    name: "RestaurantCreate",
+    component: RestaurantCreate,
+    meta: {
+      requireLogin: true
+    }
+  },
+  {
+    path: "/statistics",
+    name: "Statistics",
+    component: Statistics,
+    meta: {
+      requireLogin: true
+    }
+  },
+  {
+    path: "/reports",
+    name: "Reports",
+    component: Reports,
+    meta: {
+      requireLogin: true
+    }
   },
   {
     path: '/about',

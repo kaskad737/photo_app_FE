@@ -1,71 +1,58 @@
 <template>
-    <h2 class="title">Check-out</h2>
-    <form @submit.prevent="submitForm" class="field">
-        <label for="restaurants">
-            Select your restaurant
-        </label>
-        <select name="" v-model="restaurants" class="select">
-            <option v-for="option in restaurants" value="option">{{ option }}</option>
-        </select>
-        <label for="userName">
-            Name
-        </label>
-        <input class='input' type="text" id="userName" v-model="userName" required />
+    <div class="container">
 
-        <label for="frames">
-            Number of frames sold
-        </label>
-        <input class='input' type="number" id="frames" v-model="frames" required>
+        <router-link to="/"
+            class="button"><strong>← Back</strong>
+        </router-link>    
 
-        <label for="sets">
-            Number of photos 4x6
-        </label>
-        <input class='input' type="number" id="sets" v-model="sets" required>
+        <div class="column is-4 is-offset-4">
+            <h2 class="title">Check-out</h2>
+            <form @submit.prevent="submitForm" class="field">
+                <label for="frames">
+                    Number of frames sold
+                </label>
+                <input class='input' type="number" id="frames" v-model="frames" required>
 
-        <label for="cardsPrinted">
-            Number of printerd postcards
-        </label>
-        <input class='input' type="text" id="cardsPrinted" v-model="cardsPrinted" required>
-        <label for="usedSets">
-            Number of used photosets
-        </label>
-        <input class='input' type="text" id="usedSets" v-model="usedSets" required>
+                <label for="sets">
+                    Number of photos 4x6
+                </label>
+                <input class='input' type="number" id="sets" v-model="sets" required>
 
-        <label for="cash">
-            Daily cash profit
-        </label>
-        <input class='input' type="text" id="cash" v-model="cash" required>
+                <label for="cardsPrinted">
+                    Number of printerd postcards
+                </label>
+                <input class='input' type="text" id="cardsPrinted" v-model="cardsPrinted" required>
+                <label for="usedSets">
+                    Number of used photosets
+                </label>
+                <input class='input' type="text" id="usedSets" v-model="usedSets" required>
 
-        <label for="givenFrames">
-            Number of given frames
-        </label>
-        <input class='input' type="text" id="givenFrames" v-model="givenFrames" required>
+                <label for="cash">
+                    Daily cash profit
+                </label>
+                <input class='input' type="text" id="cash" v-model="cash" required>
 
-        <label for="damagedFrames">
-            Number of damaged frames
-        </label>
-        <input class='input' type="text" id="damagedFrames" v-model="damagedFrames" required>
+                <label for="givenFrames">
+                    Number of given frames
+                </label>
+                <input class='input' type="text" id="givenFrames" v-model="givenFrames" required>
 
-        <label for="discount">
-            Discount approved by the manager
-        </label>
-        <input class='input' type="text" id="discount" v-model="discount" required>
+                <label for="damagedFrames">
+                    Number of damaged frames
+                </label>
+                <input class='input' type="text" id="damagedFrames" v-model="damagedFrames" required>
 
-        <label for="time">
-            Time OUT
-        </label>
-        <input class='input' type="text" v-bind:value="timeOut" readonly>
+                <label for="time">
+                    Time OUT
+                </label>
+                <input class='input' type="text" v-bind:value="timeOut" readonly>
 
-        <label for="sign">
-            Sign in by entering your name below
-        </label>
-        <input class='input' type="text" v-model="sign" @input="toUpperCase" required>
-
-        <button class="button submit-btn" type="submit">
-            Submit
-        </button>
-    </form>
-
+                <button class="button submit-btn" type="submit">
+                    Submit
+                </button>
+            </form>
+        </div>
+    </div>
 </template>
 
 <script>

@@ -1,62 +1,64 @@
 <template>
-    <h2 class="title">Check-in</h2>
-    <form @submit.prevent="submitForm" class="field">
-        <label for="restaurants">
-            Select your restaurant
-        </label>
-        <select name="" v-model="restaurants" class="select">
-            <option v-for="option in restaurants" value="option">{{option}}</option>
-        </select>
+    <div class="container">
+        
+        <router-link to="/"
+        class="button"><strong>← Back</strong>
+        </router-link>    
+            
+        <div class="column is-4 is-offset-4">
+            <h2 class="title">Check-in</h2>
+            <form @submit.prevent="submitForm" class="field">
+                <label for="restaurants">
+                    Select your restaurant
+                </label>
+                <select v-model="selectedRestaurantId" class="select">
+                    <option v-for="restaurant in restaurants" :key="restaurant.id" :value="restaurant.id">
+                        {{ restaurant.name }}
+                    </option>
+                </select>
 
-        <label for="name">
-            Name
-        </label>
-        <input class='input' type="text" v-model="userName" required />
+                <label for="frames">
+                    Number of frames
+                </label>
+                <input class='input' type="number" v-model="frames" required>
 
-        <label for="frames">
-            Number of frames
-        </label>
-        <input class='input' type="number" v-model="frames" required>
+                <label for="sets">
+                    Number of sets
+                </label>
+                <input class='input' type="number" v-model="sets" required>
 
-        <label for="sets">
-            Number of sets
-        </label>
-        <input class='input' type="number" v-model="sets" required>
+                <label for="printer">
+                    Printer life
+                </label>
+                <input class='input' type="text" v-model="printer" required>
 
-        <label for="printer">
-            Printer life
-        </label>
-        <input class='input' type="text" v-model="printer" required>
+                <label for="cash">
+                    Cash (US Dollars)
+                </label>
+                <input class='input' type="number" v-model="cash" required>
 
-        <label for="cash">
-            Cash
-        </label>
-        <input class='input' type="number" v-model="cash" required>
+                <label for="timeIn">
+                    Time IN
+                </label>
+                <input class='input' type="text" v-bind:value="timeIn" readonly>
 
-        <label for="timeIn">
-            Time IN
-        </label>
-        <input class='input' type="text" v-bind:value="timeIn" readonly>
-
-        <label for="sign">
-            Sign in by entering your name below
-        </label>
-        <input class='input' type="text" v-model="sign" @input="toUpperCase" 
-        required>
-
-        <button class="button submit-btn" type="submit">
-            Submit
-        </button>
-    </form>
+                <button class="button submit-btn" type="submit">
+                    Submit
+                </button>
+            </form>
+        </div>
+    </div>
 </template>
 
 <script>
+import axios from 'axios';
 
 export default {
     name: 'TimeIn',
     data() {
         return {
-            restaurants: ["Restaurant1", "Restaurant2", "Restaurant3", "Restaurant4", ],
+            restaurants: [],
+            selectedRestaurantId: null,
             restaurant: '',
             userName: '',
             frames: '',
@@ -66,6 +68,9 @@ export default {
             timeIn: '',
             sign: '',
         };
+    },
+    mounted() {
+        this.fetchRestaurants();
     },
     created() {
         this.updateTime();
@@ -77,6 +82,15 @@ export default {
             // Update currentTime with the current date and time formatted as needed
             const now = new Date();
             this.timeIn = now.toLocaleTimeString();
+        },
+
+        async fetchRestaurants() {
+          try {
+            const response = await axios.get('workday/restaurants/');
+            this.restaurants = response.data.results;
+          } catch (error) {
+            console.error('Error fetching restaurants:', error);
+          }
         },
 
         beforeUnmount() {

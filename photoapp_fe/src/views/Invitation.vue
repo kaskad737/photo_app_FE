@@ -60,7 +60,6 @@
             };
         },
         mounted() {
-            // Get the invitation token from the URL query parameter
             const invitationToken = this.$route.query.invitation;
             if (invitationToken) {
                 this.form.invitation = invitationToken;

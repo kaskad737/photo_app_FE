@@ -68,8 +68,26 @@
                         localStorage.setItem("access", access)
                         localStorage.setItem("refresh", refresh)
 
-                        this.$router.push("/")
+                        return axios.get('auth/users/');
+                    })
+                    .then((response) => {
+                        const filteredUserId = response.data.results.find(user => user.username === formData.username).pk;
+                        return axios.get(`auth/users/${filteredUserId}`);
+                    })
+                    .then((response) => {
+                        const user = response.data;
 
+                        this.$store.commit('setUser', {
+                            userId: user.id,
+                            username: user.username,
+                            userFirstName: user.first_name,
+                        });
+
+                        localStorage.setItem('userId', user.id);
+                        localStorage.setItem('username', user.username);
+                        localStorage.setItem('userFirstName', user.first_name);
+
+                        this.$router.push("/")
                     })
                     .catch(error => {
                         console.log(error)

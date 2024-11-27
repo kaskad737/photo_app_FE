@@ -1,5 +1,10 @@
 <template>
     <div class="container">
+
+        <router-link to="/"
+            class="button"><strong>← Back</strong>
+        </router-link>
+
         <div class="column">
             <div class="column is-4 is-offset-4">
                 <h1 class="title">Invite</h1>

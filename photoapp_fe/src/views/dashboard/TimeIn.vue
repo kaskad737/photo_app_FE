@@ -2,7 +2,7 @@
     <div class="container">
         
         <router-link to="/"
-        class="button"><strong>← Back</strong>
+            class="button"><strong>← Back</strong>
         </router-link>    
             
         <div class="column is-4 is-offset-4">

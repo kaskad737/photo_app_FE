@@ -55,81 +55,81 @@
 
 
 <script>
-import axios from 'axios';
-import { OhVueIcon, addIcons } from "oh-vue-icons";
-import { MdClouduploadOutlined } from "oh-vue-icons/icons";
+  import axios from 'axios';
+  import { OhVueIcon, addIcons } from "oh-vue-icons";
+  import { MdClouduploadOutlined } from "oh-vue-icons/icons";
 
-addIcons(MdClouduploadOutlined)
+  addIcons(MdClouduploadOutlined)
 
-  export default {
-  name: 'ImageUpload',
-  components: {
-    OhVueIcon,
-  },
-    data() {
-      return {
-        selectedFile: null,
-        selectedFileName: '',
-        uploadedImageUrl: '',
-        frames: [],  
-        selectedFrameId: null,  
-        isDataUploaded: false,
-      };
-  },
-  mounted() {
-      this.fetchFrames();  
+    export default {
+    name: 'ImageUpload',
+    components: {
+      OhVueIcon,
     },
-    methods: {
-      
-      async fetchFrames() {
-        try {
-          const response = await axios.get('http://localhost:8000/image/list_frames/');
-          this.frames = response.data.results;  
-        } catch (error) {
-          console.error('Error fetching frames:', error);
-        }
-      },
-      
-      handleFileChange(event) {
-        const file = event.target.files[0];
-        if (file) {
-          this.selectedFile = file;
-          this.selectedFileName = file.name;
-          this.uploadedImageUrl = URL.createObjectURL(file);
-        }
-      },
-      
-      async uploadFile() {
-        if (!this.selectedFile || !this.selectedFrameId) return;
-
-        const formData = new FormData();
-        formData.append('file', this.selectedFile);
-        formData.append('frame_id', this.selectedFrameId); 
-
-        try {
-          const response = await axios.post('http://localhost:8000/image/upload/', formData, {
-            headers: {
-              'Content-Type': 'multipart/form-data',
-              'accept': '*/*',
-            },
-            responseType: 'blob'
-          });
-
-          console.log('The file has been successfully uploaded:', response.data);
-
-          this.uploadedImageUrl = URL.createObjectURL(response.data);
-
-          this.isDataUploaded = true;
-
-          this.selectedFile = null;
-          this.selectedFileName = '';
-          this.selectedFrameId = null;
-        } catch (error) {
-          console.error('Error when uploading a file:', error);
-        }
-      },
+      data() {
+        return {
+          selectedFile: null,
+          selectedFileName: '',
+          uploadedImageUrl: '',
+          frames: [],  
+          selectedFrameId: null,  
+          isDataUploaded: false,
+        };
     },
-};
+    mounted() {
+        this.fetchFrames();  
+      },
+      methods: {
+        
+        async fetchFrames() {
+          try {
+            const response = await axios.get('http://localhost:8000/image/list_frames/');
+            this.frames = response.data.results;  
+          } catch (error) {
+            console.error('Error fetching frames:', error);
+          }
+        },
+        
+        handleFileChange(event) {
+          const file = event.target.files[0];
+          if (file) {
+            this.selectedFile = file;
+            this.selectedFileName = file.name;
+            this.uploadedImageUrl = URL.createObjectURL(file);
+          }
+        },
+        
+        async uploadFile() {
+          if (!this.selectedFile || !this.selectedFrameId) return;
+
+          const formData = new FormData();
+          formData.append('file', this.selectedFile);
+          formData.append('frame_id', this.selectedFrameId); 
+
+          try {
+            const response = await axios.post('http://localhost:8000/image/upload/', formData, {
+              headers: {
+                'Content-Type': 'multipart/form-data',
+                'accept': '*/*',
+              },
+              responseType: 'blob'
+            });
+
+            console.log('The file has been successfully uploaded:', response.data);
+
+            this.uploadedImageUrl = URL.createObjectURL(response.data);
+
+            this.isDataUploaded = true;
+
+            this.selectedFile = null;
+            this.selectedFileName = '';
+            this.selectedFrameId = null;
+          } catch (error) {
+            console.error('Error when uploading a file:', error);
+          }
+        },
+      },
+  };
 </script>
 
   

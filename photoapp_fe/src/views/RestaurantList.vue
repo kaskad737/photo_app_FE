@@ -9,14 +9,16 @@
     <h1 class="title">Restaurants</h1>
       <ul class="menu-list">
         <li v-for="restaurant in restaurants" :key="restaurant.id" class="button is-link is-outlined is-dark is-fullwidth">
-          {{ restaurant.name }}
+          <router-link :to="{ name: 'RestaurantDetails', params: { id: restaurant.id } }">
+            {{ restaurant.name }}
+          </router-link>
         </li>
       </ul>
     </div>
   </div>
 </template>
   
-  <script>
+<script>
   import axios from 'axios';
   
   export default {
@@ -39,7 +41,4 @@
       },
     },
   };
-  </script>
-  
-в
-  
+</script>

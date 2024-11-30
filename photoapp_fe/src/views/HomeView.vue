@@ -24,6 +24,13 @@
           2.Upload Image
         </router-link>
       </div>
+      <h2 class=" title">Images</h2>
+      <div class="button-container">
+        <router-link to="/list-images" class="button is-primary is-large">
+          <OhVueIcon name="la-photo-video-solid" scale="1.5" />
+          List all images
+        </router-link>
+      </div>
       <h2 class=" title">Generate Statistics:</h2>
       <div class="button-container">
         <router-link to="/statistics" class="button is-primary is-large">
@@ -59,8 +66,18 @@
   import { CoRestaurant } from "oh-vue-icons/icons";
   import { RiNumbersFill } from "oh-vue-icons/icons";
   import { HiDocumentReport } from "oh-vue-icons/icons";
+  import { LaPhotoVideoSolid } from "oh-vue-icons/icons";
 
-  addIcons(MdLoginRound, MdLogoutRound, BiImageFill, MdFilterframesOutlined, CoRestaurant, RiNumbersFill, HiDocumentReport)
+  addIcons(
+    MdLoginRound, 
+    MdLogoutRound, 
+    BiImageFill, 
+    MdFilterframesOutlined, 
+    CoRestaurant, 
+    RiNumbersFill, 
+    HiDocumentReport, 
+    LaPhotoVideoSolid,
+  )
 
   export default {
   name: 'HomeView',

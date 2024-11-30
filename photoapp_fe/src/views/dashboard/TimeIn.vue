@@ -113,7 +113,6 @@ export default {
                 sets: this.sets,
                 printer: this.printer,
                 cash: this.cash,
-                sign: this.sign,
             };
             console.log(formData)
         },

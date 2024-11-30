@@ -17,6 +17,11 @@
           </option>
         </select>
       </div>
+
+      <div v-if="errorMessage" class="notification is-danger">
+          {{ errorMessage }}
+      </div>
+
       <div  v-if="selectedRestaurantId" class="file-upload-container">
         <div class="file has-name is-boxed">
           <label class="file-label">
@@ -46,7 +51,7 @@
   </div>
 </template>
     
-  <script>
+<script>
   import axios from 'axios';
   import { OhVueIcon, addIcons } from "oh-vue-icons";
   import { MdClouduploadOutlined } from "oh-vue-icons/icons";
@@ -65,6 +70,7 @@
           uploadedImageUrl: '',
           restaurants: [],
           selectedRestaurantId: null,
+          errorMessage: '',
         };
       },
       mounted() {
@@ -98,7 +104,7 @@
           
           console.log(axios.defaults.headers.common)
           try {
-            const response = await axios.post('http://localhost:8000/image/upload_frame/', formData, {
+            const response = await axios.post('image/upload_frame/', formData, {
               headers: {
                 'Content-Type': 'multipart/form-data',
                 'accept': '*/*',
@@ -112,13 +118,24 @@
             this.selectedRestaurantId = null;
           } catch (error) {
             console.error('Error when uploading a file:', error);
+
+            if (error.response && error.response.data && error.response.data.message) {
+              this.errorMessage = error.response.data.message;
+            } else {
+              this.errorMessage = 'An unknown error occurred. Please try again.';
+            } 
+
+            this.selectedFile = null;
+            this.selectedFileName = '';
+            this.uploadedImageUrl = '';
+            this.selectedRestaurantId = null;
           }
         },
       },
     };
-  </script>
+</script>
     
-  <style scoped>
+<style scoped>
   .file-upload-container {
     margin-top: 20px;
     display: flex;

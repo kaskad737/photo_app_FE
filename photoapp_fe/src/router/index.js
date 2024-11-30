@@ -13,6 +13,9 @@ import RestaurantList from "@/views/RestaurantList.vue";
 import RestaurantCreate from "@/views/RestaurantCreate.vue";
 import Statistics from "@/views/Statistics.vue";
 import Reports from "@/views/Reports.vue";
+import ListImages from "@/views/ListImages.vue"
+import ImageDownload from '@/views/ImageDownload.vue'
+import RestaurantDetails from '@/views/RestaurantDetails.vue'
 
 
 const routes = [
@@ -113,6 +116,27 @@ const routes = [
     path: "/reports",
     name: "Reports",
     component: Reports,
+    meta: {
+      requireLogin: true
+    }
+  },
+  {
+    path: "/list-images",
+    name: "ListImages",
+    component: ListImages,
+    meta: {
+      requireLogin: true
+    }
+  },
+  {
+    path: "/image-download/:id",
+    name: "ImageDownload",
+    component: ImageDownload,
+  },
+  {
+    path: "/restaurant/:id",
+    name: "RestaurantDetails",
+    component: RestaurantDetails,
     meta: {
       requireLogin: true
     }

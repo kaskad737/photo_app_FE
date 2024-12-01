@@ -19,11 +19,18 @@
         Upload Image
       </router-link>
     </div>
-      <router-link to="/frame-upload" class="button is-primary is-large custom-btn">
+    <div class="button-container">
+      <router-link to="/restaurants" class="button is-primary is-large custom-btn">
         <OhVueIcon name="md-restaurant" scale="1.5" />
         Restaurants
       </router-link>
-
+    </div>
+    <div class="button-container">
+      <router-link to="/user-list" class="button is-primary is-large custom-btn">
+        <OhVueIcon name="fa-user" scale="1.5" />
+        User List
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -34,8 +41,9 @@ import { MdLoginRound } from "oh-vue-icons/icons";
 import { MdLogoutRound } from "oh-vue-icons/icons";
 import { BiImageFill } from "oh-vue-icons/icons";
 import { MdRestaurant } from "oh-vue-icons/icons";
+import { FaUser } from "oh-vue-icons/icons";
 
-addIcons(MdLoginRound, MdLogoutRound, BiImageFill, MdRestaurant)
+addIcons(MdLoginRound, MdLogoutRound, BiImageFill, MdRestaurant, FaUser)
 
   export default {
   name: 'HomeView',

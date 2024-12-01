@@ -152,8 +152,7 @@
     align-items: center;
     justify-content: space-around;
     margin-bottom: 15px;
-    border: 1px solid grey;
-    border-radius: 20px;
+    border-bottom: 1px solid grey;
     padding: 10px;
   }
 

@@ -6,7 +6,7 @@ import HomeView from '../views/HomeView.vue'
 
 import Invite from '@/views/Invite.vue'
 import LogIn from '@/views/LogIn.vue'
-import MyAccount from '@/views/dashboard/MyAccount.vue'
+import UserList from '@/views/dashboard/UserList.vue'
 import ImageUpload from '@/views/ImageUpload.vue'
 import FrameUpload from '@/views/FrameUpload.vue'
 import Invitation from '@/views/Invitation.vue'
@@ -31,9 +31,9 @@ const routes = [
     component: LogIn
   },
   {
-    path: '/my-account',
-    name: 'MyAccount',
-    component: MyAccount,
+    path: '/user-list',
+    name: 'UserList',
+    component: UserList,
     // meta: {
     //   requireLogin: true
     // }
@@ -47,7 +47,7 @@ const routes = [
     // }
   },
   {
-    path: '/frame-upload',
+    path: '/restaurants',
     name: 'FrameUpload',
     component: FrameUpload,
     // meta: {

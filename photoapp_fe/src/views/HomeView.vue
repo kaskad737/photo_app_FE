@@ -4,11 +4,11 @@
     <div class="section-container">
       <h2 class="title">Manage your shift:</h2>
       <div class="button-container">
-        <router-link to="/time-in" class="button">
+        <router-link v-if="!userStartShift"  to="/time-in" class="button">
           <OhVueIcon name="md-login-round" scale="1.5" />
           Check-in
         </router-link>
-        <router-link to="/time-out" class="button">
+        <router-link v-if="userStartShift" to="/time-out" class="button">
           <OhVueIcon name="md-logout-round" scale="1.5" />
           Check-out
         </router-link>
@@ -58,6 +58,7 @@
 </template>
 
 <script>
+  import { mapState } from 'vuex';
   import { OhVueIcon, addIcons } from "oh-vue-icons";
   import { MdLoginRound } from "oh-vue-icons/icons";
   import { MdLogoutRound } from "oh-vue-icons/icons";
@@ -81,6 +82,9 @@
 
   export default {
   name: 'HomeView',
+  computed: {
+        ...mapState(['userStartShift']),
+    },
   data() {
       return {
           username: '',

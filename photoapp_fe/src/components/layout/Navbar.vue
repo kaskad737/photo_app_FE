@@ -33,28 +33,29 @@
     methods: {
         logout() {
             this.$store.commit('removeAccess')
+            this.$store.commit('clearUser')
             this.$router.push('/log-in'); 
+            }
         }
     }
-}
 </script>
 
 <style scoped>
-.my-account-btn {
-    background-color: #2f4870;
-    color: white;
-    font-weight: bold;
-}
-.navbar-menu{
-    display: flex;
-}
-.container{
-    max-width: 900px;
-}
-@media screen and (max-width: 1023px) {
-    .navbar>.container {
-        display: flex;
-        justify-content: space-between;
+    .my-account-btn {
+        background-color: #2f4870;
+        color: white;
+        font-weight: bold;
     }
-}
+    .navbar-menu{
+        display: flex;
+    }
+    .container{
+        max-width: 900px;
+    }
+    @media screen and (max-width: 1023px) {
+        .navbar>.container {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
 </style>

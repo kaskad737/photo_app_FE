@@ -81,11 +81,13 @@
                             userId: user.id,
                             username: user.username,
                             userFirstName: user.first_name,
+                            userRole: user.role
                         });
 
                         localStorage.setItem('userId', user.id);
                         localStorage.setItem('username', user.username);
                         localStorage.setItem('userFirstName', user.first_name);
+                        localStorage.setItem('userRole', user.role);
 
                         this.$router.push("/")
                     })

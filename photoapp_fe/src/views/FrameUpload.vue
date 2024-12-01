@@ -33,11 +33,14 @@
     </div>
   </div>
   <div>
-    <h2 class="title">A list of saved restaurants:</h2>
+    <h2 class="title">A list of restaurants</h2>
     <ul>
       <li v-for="item, index in restaurants" class="list-item-container">
         <p class="item-title">{{item.name}}</p>
         <img :src="item.picture" >
+        <button type="button" class="update-btn">
+          update
+        </button>
         <button type="button" @click="deleteItem(index)">
           <OhVueIcon name="md-close"/>
         </button>
@@ -160,6 +163,16 @@
     width: 150px;
     word-wrap: break-word;
   }
+  .update-btn{
+    background-color: #00d1b2;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 30px;
+  }
+  .update-btn:hover{
+    background-color: #3273dc;
+  }
+
 
 </style>
     

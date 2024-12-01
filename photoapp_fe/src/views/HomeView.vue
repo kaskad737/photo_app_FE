@@ -12,7 +12,7 @@
         Check-out
       </router-link>
     </div>
-    <h2 class=" title">Create photo</h2>
+    <h2 class=" title"></h2>
     <div class="button-container">
       <router-link to="/image-upload" class="button is-primary is-large custom-btn">
       <OhVueIcon name="bi-image-fill" scale="1.5" />

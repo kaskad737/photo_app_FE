@@ -13,8 +13,16 @@
                         </span>
                         {{user.first_name}} {{user.last_name}}
                     </span>
-                    <span>{{user.email}}</span>
-                    <span>{{user.phone}}</span>
+                    <span>
+                        <a :href="`mailto:${user.email}`" class="link">
+                            {{user.email}}
+                        </a>
+                    </span>
+                    <span>
+                        <a :href="`tel:${user.phone}`" class="link">
+                            {{user.phone}}
+                        </a>
+                    </span>
                     <span>{{user.role}}</span>
                     <span>registered on {{formatDate(user.registered)}}</span>
                 </p>
@@ -55,6 +63,9 @@ console.log(users)
 <style scoped>
 span{
     display: block;
+}
+.link{
+    color: inherit;
 }
 .user-list-item{
     display: flex;

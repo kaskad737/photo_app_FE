@@ -2,9 +2,10 @@
     <div class="container">
         <div class="columns is-multiline">
             <div class="column is-12">
-                <h1 class="title">User List:</h1>
+                <h1 class="title">User list</h1>
             </div>
         </div>
+        <input type="text" @change="handleSearch(evt)" class="input" placeholder="Search in users">
         <ul>
             <li v-for="user in users" class="user-list-item">
                 <p class="user-list-row">  
@@ -55,7 +56,10 @@ console.log(users)
             const [, year, month, day] = match;
 
             return `${day}.${month}.${year}`;
-            }
+        },
+        handleSearch(evt) { 
+            console.log(evt)
+        }
     }
 }
 </script>
